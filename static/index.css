@@ -1,0 +1,25 @@
+.od:hover {
+  background-color: white !important;
+  color: black !important;
+}
+.form1,
+.form2 {
+  position: relative;
+}
+legend {
+  /* outline: 2px solid blue; */
+  position: absolute;
+  top: -17px;
+  background-color: white;
+}
+#AdvancedOptions,
+#TestingZone,
+#UserAlert,
+#UserConfirm,
+#LoginConfirm,
+#LoginAlert {
+  display: none;
+}
+.head {
+  font-family: "Cinzel Decorative", cursive;
+}
