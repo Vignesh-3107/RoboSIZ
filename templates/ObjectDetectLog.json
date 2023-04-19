@@ -1,0 +1,62 @@
+{
+    "@Description": {
+        "_Class": "Class of Object",
+        "_Accuracy": "Accuracy level of Detection",
+        "_Time": "Date and Time of Execution"
+    },
+    "1": {
+        "_Class": "Text",
+        "_Accuracy": "27.27",
+        "_Time": "18-Apr-2023 23:21:38"
+    },
+    "2": {
+        "_Class": "Text",
+        "_Accuracy": "40.728",
+        "_Time": "18-Apr-2023 23:21:41"
+    },
+    "3": {
+        "_Class": "Text",
+        "_Accuracy": "46.483",
+        "_Time": "18-Apr-2023 23:21:42"
+    },
+    "4": {
+        "_Class": "Component",
+        "_Accuracy": "56.714",
+        "_Time": "18-Apr-2023 23:21:42"
+    },
+    "5": {
+        "_Class": "Text",
+        "_Accuracy": "61.012",
+        "_Time": "18-Apr-2023 23:21:42"
+    },
+    "6": {
+        "_Class": "Text",
+        "_Accuracy": "66.739",
+        "_Time": "18-Apr-2023 23:21:43"
+    },
+    "7": {
+        "_Class": "Component",
+        "_Accuracy": "71.365",
+        "_Time": "18-Apr-2023 23:21:44"
+    },
+    "8": {
+        "_Class": "Component",
+        "_Accuracy": "75.149",
+        "_Time": "18-Apr-2023 23:21:44"
+    },
+    "9": {
+        "_Class": "Component",
+        "_Accuracy": "75.171",
+        "_Time": "18-Apr-2023 23:21:44"
+    },
+    "10": {
+        "_Class": "Text",
+        "_Accuracy": "75.898",
+        "_Time": "18-Apr-2023 23:21:44"
+    },
+    "11": {
+        "_Class": "Text",
+        "_Accuracy": "27.076",
+        "_Time": "18-Apr-2023 23:21:45"
+    }
+}

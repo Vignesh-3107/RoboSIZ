@@ -1,0 +1,334 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <title>Project RoboSIZ</title>
+    <meta name="description" content="" />
+    <link rel="icon" href="{{ url_for('static',filename='Detectron.png') }}" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <script src="https://code.jquery.com/jquery-1.11.1.min.js"></script>
+    <script src="http://code.jquery.com/jquery-1.8.2.js"></script> 
+    <style>
+      #loader {  
+        position: fixed;  
+        left: 0%;  
+        top: 0%;  
+        width: 100%;  
+        height: 100%;  
+        z-index: 9999;  
+        background: url("{{ url_for('static',filename='loading2.gif') }}") 50% 50% no-repeat transparent;  
+    } 
+     
+      </style>
+      <script type="text/javascript">  
+        $(window).load(function() {  
+            $("#loader").style.display="block";  
+        });
+      </script>
+    <link
+      href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css"
+      rel="stylesheet"
+      integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC"
+      crossorigin="anonymous"
+    />
+    <link rel="stylesheet" href="{{ url_for('static', filename='index.css') }}" />
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Cinzel+Decorative:wght@400;700&display=swap" rel="stylesheet">
+    <script src="https://kit.fontawesome.com/f59d92f9d9.js" crossorigin="anonymous"></script>
+    <script type = "text/javascript" language = "javascript">
+           
+         $(document).ready(function() {
+         
+            $("#AvS").click(function(event){
+              $('#AdvancedOptions').toggle();
+            });
+            $("#LCbtn").click(function(event){
+              $('#LoginConfirm').toggle();
+            });
+             $("#LAbtn").click(function(event){
+              $('#LoginAlert').toggle();
+            });
+           
+         });
+
+      </script>
+      <style>
+              .site-footer {
+        margin: 0 auto;
+        padding: 80px 0 25px;
+        padding: 0;
+        max-width: 820px;
+      }
+      .site-footer__fineprint {
+        font-size: 0.9375rem;
+        line-height: 1.3;
+        font-weight: 300;
+      }
+      @media only screen and (min-width: 40em) {
+    
+        .site-footer {
+          padding: 145px 0 25px;
+        }
+        .site-footer__fineprint {
+          font-size: 1.125rem;
+        }
+      }
+      </style>
+      <script> 
+       const DataBase = JSON.parse({{DataBase|tojson}});
+       
+      </script>
+     
+  </head>
+  <body class="container">
+ <div id="loader" style="display:none;"></div> 
+    <div class="container-fluid">
+      <br /><br />
+      <h1 class="h1 col-12 text-left text-info head"><img src="../static/Detectron.png" class="rounded" height="65" width="65" /> &nbsp;ROBOSIZ
+     
+      </h1>
+    </div>
+
+    <br />
+
+    <div class="container">
+      <ul class="nav nav-tabs">
+        <li class="nav-item">
+          <a class="nav-link active" href="#"><i class="fa-solid fa-house fa-fade" style="color: #0f5ee6"></i> &nbsp; Home</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" href="#"><i class="fa-solid fa-object-group" style="color: #0f5ee6"></i> &nbsp; Object Detection</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" href="#"><i class="fa-solid fa-rectangle-list" style="color: #0f5ee6"></i> &nbsp; OCR</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link disabled" href="#"><i class="fa-solid fa-square-poll-vertical disabled" style="color: #0f5ee6"></i> &nbsp; Result</a>
+        </li>
+      </ul>
+    </div>
+    <br /><br />
+    <div class="container">
+      
+      <div class="alert alert-success alert-dismissible" id="LoginConfirm">
+        <button type="button" class="btn-close" data-bs-dismiss="alert" id="LCbtn"></button>
+        <strong id="UserConfirm">Success!</strong>
+      </div>
+
+      <div class="alert alert-danger alert-dismissible" id="LoginAlert">
+        <button type="button" class="btn-close" data-bs-dismiss="alert" id="LAbtn"></button>
+        <strong id="UserAlert">Success!</strong>
+      </div>
+      <div class="alert alert-danger" id="UserAlert" role="alert">
+         User Not Found. Check your Login Credentials.
+      </div>
+      <br>
+      <form name="UserAuth" class="form1" id="UserAuthenticationForm">
+        <fieldset class="form-group border p-3">
+          <br />
+          <legend class="w-auto px-2">User Authentication</legend>
+          <div class="col-10">
+            <label for="InputCode" class="form-label">Operator Token Code / ID</label>
+            <input type="text" class="form-control" id="InputCode" aria-describedby="OTCHelp" name="User" />
+            <div id="OTCHelp" class="form-text">It's just to be used for authentication purposes and for no other reason.</div>
+          </div>
+          <br />
+          <div class="col-10">
+            <label for="Password" class="form-label">Password</label>
+            <input type="password" class="form-control" id="Password" name="Password" />
+          </div>
+          <br />
+          <div class="col-md-4 d-flex">
+            <label class="form-check-label col-4">Is TLC ? </label>
+            <div class="form-check col-4">
+              <input class="form-check-input" type="radio" name="TLC" id="TempLogYes" value="TLC" />
+              <label class="form-check-label" for="TempLogYes"> Yes </label>
+            </div>
+            <div class="form-check col-4">
+              <input class="form-check-input" type="radio" name="TLC" id="TempLogNo" value="NO TLC" checked />
+              <label class="form-check-label" for="TempLogNo"> No </label>
+            </div>
+          </div>
+          <p><small> <i>*TLC - Temporary Login Credentials</i>  </small></p>
+          
+          <div class="col-10 form-switch">
+            <input type="checkbox" class="form-check-input" id="Confirm" name="Robot" value="Human" />
+            <label class="form-check-label" for="Confirm">Confirm that you're not robot</label>
+          </div>
+          <br />
+          <div class="col-md-8">
+            <button type="submit" class="btn btn-primary col-md-3" id="UserSubmit" onclick="AuthenticateUser()">Submit</button>
+            <button type="reset" class="btn btn-danger col-md-3">Reset</button>
+          </div>
+        </fieldset>
+      </form>
+      
+      <form action="/result" name="Testing" class="form2" id="TestingZone" style="display:none;" method="post">
+        <fieldset class="form-group border p-3">
+          <br />
+          <legend class="w-auto px-2">Detection Input</legend>
+          <div class="col-10">
+            <label for="InputCode2" class="form-label">Product Serial Number</label>
+            <input type="text" class="form-control" aria-describedby="ProductHelp" name="ProductId" id="InputCode2" />
+            <div id="ProductHelp" class="form-text">It's unique serial number of product.</div>
+          </div>
+          <br />
+
+          <div class="col-10 form-switch">
+            <input type="checkbox" class="form-check-input" id="Confirm2" name="BeginProcess" />
+            <label class="form-check-label" for="Confirm2"></label>
+            Be ensures the operation can begin after you submit the data and cannot be interrupted.</label>
+          </div>
+          <br />
+          <div class="col-10 form-switch">
+            <input type="checkbox" class="form-check-input" id="AvS" name="AvdSearch"  />
+            <label class="form-check-label" for="AvS"></label>
+            Advanced Search Options </label>
+          </div>
+          <br />
+          <div id="AdvancedOptions" style="display:none;" >
+             <div class="col-10">
+            <label for="AdInputCode" class="form-label">Product Dimensions</label>
+            <input type="text" class="form-control" aria-describedby="ProductHelp1" name="ProductId1" id="AdInputCode" />
+            <div id="ProductHelp1" class="form-text">Dimensions of product. Ex: 15 X 5  all in mm</div>
+          </div>
+          <br />
+            <div class="col-10">
+            <label for="AdInputCode1" class="form-label">Product Color</label>
+            <input type="text" class="form-control" aria-describedby="ProductHelp2" name="ProductId2" id="AdInputCode1" />
+            <div id="ProductHelp2" class="form-text">Color of product like Orange, White, etc...</div>
+          </div>
+          <br /> <div class="col-10">
+            <label for="AdInputCode2" class="form-label">Product Type </label>
+            <input type="text" class="form-control" aria-describedby="ProductHelp3" name="ProductId2" id="AdInputCode2" />
+            <div id="ProductHelp3" class="form-text">Type of product like 5mm hearings, 10mm mid stone cast, etc.....</div>
+          </div>
+          <br />
+          
+          </div>
+          <div class="col-md-8">
+            <button type="submit" id="searchbtn" class="btn btn-primary col-3" onclick="ProductSearch()">Submit</button>
+            <button type="reset" class="btn btn-danger col-3">Reset</button>
+          </div>
+        </fieldset>
+      </form>
+    </div>
+    <script src="../templates/index.js"></script>
+    <script>
+          // const fs = require('fs')
+          let Auth = document.getElementById("UserAuthenticationForm");
+          let AdvOptions = document.getElementById("AdvancedOptions");
+          let TestZone = document.getElementById("TestingZone");
+          function AuthenticateUser() {
+            sessionStorage.setItem("User ID", document.forms["UserAuth"]["User"].value);
+            sessionStorage.setItem("Password", document.forms["UserAuth"]["Password"].value);
+            sessionStorage.setItem("TLC", document.forms["UserAuth"]["TLC"].value);
+            sessionStorage.setItem("Robot", document.forms["UserAuth"]["Robot"].checked == true ? "Human" : "Robot");
+            user = sessionStorage.getItem("User ID");
+            pwd = sessionStorage.getItem("Password");
+            TLC = sessionStorage.getItem("TLC");
+            Obj = sessionStorage.getItem("Robot");
+            sessionStorage.setItem("LogCount",1);
+            validationDetails();
+          }
+          var user = sessionStorage.getItem("User ID");
+          var pwd = sessionStorage.getItem("Password");
+          var TLC = sessionStorage.getItem("TLC");
+          var Obj = sessionStorage.getItem("Robot");
+          var data = DataBase;
+          var Disable = sessionStorage.getItem("Disable");
+          var Product = sessionStorage.getItem("ProductSerial");
+          var AdvOpt = sessionStorage.getItem("AdvSearch");
+          var BegProcess = sessionStorage.getItem("BeginSearch");
+          var LogCount = sessionStorage.getItem("LogCount");
+
+          function validationDetails() {
+            if(Obj == "Human"){
+              if (TLC == "NO TLC") {
+                var data = JSON.parse(DataBase);
+                // console.log(data);
+                var status = 0;
+                for (x in data) {
+                  var USER = data[x]["_User_Id"];
+                  var PSWD = data[x]["_Code"];
+                  if (USER == user && PSWD == pwd) {
+                    var Name = data[x]["_Name"];
+                    sessionStorage.setItem("Disable", 1);
+                    localStorage.setItem("_Operator", USER);
+                    localStorage.setItem("_Name", Name);
+                    status = 1;
+                    break;
+                  }
+                  else{
+                    sessionStorage.setItem("Disable", 0);
+                  }
+              }
+              // status == 0 ? alert("No User Found") : confirm(" Welcome, " + Name);
+              status == 0 ? document.getElementById("UserAlert").style.display = "block" : document.getElementById("LoginConfirm").style.display = "block";
+
+            }
+          }}
+          if (sessionStorage.getItem("Disable") == 1 && Obj == "Human") {
+            document.getElementById("LoginConfirm").style.display = "block";
+            document.getElementById("UserConfirm").style.display = "block";
+            document.getElementById("UserConfirm").innerHTML= `Welcome Back, ${localStorage.getItem("_Name")}. You Logged in ${date()}  ${time()}. Thank You. `;
+            Auth.style.display = "none";
+            TestZone.style.display = "block";
+          }
+          else if(sessionStorage.getItem("Disable") ==0 || Obj == "Robot" ) {
+            document.getElementById("LoginAlert").style.display = "block"
+            document.getElementById("UserAlert").style.display = "block"
+            document.getElementById("UserAlert").innerHTML= `User Not Found. Check your Login Credentials.`;
+            
+          }
+          function ProductSearch() {
+            sessionStorage.setItem("ProductSerial", document.forms["Testing"]["ProductId"].value);
+            sessionStorage.setItem("BeginSearch", document.forms["Testing"]["BeginProcess"].checked == true ? 1 : 0);
+            sessionStorage.setItem("AdvSearch", document.forms["Testing"]["AvdSearch"].checked == true ? 1 : 0);
+            localStorage.setItem("Product", sessionStorage.getItem("ProductSerial"));
+            TestZone.style.filter = 'blur(2px)';
+            document.getElementById("loader").style.display = "block";
+            AdvOpt = sessionStorage.getItem("AdvSearch");
+            BegProcess = sessionStorage.getItem("BeginSearch");
+            if (AdvOpt == 1) {
+              console.log("Adv Option");
+            }
+
+        }
+         
+
+          if (BegProcess == 1) {
+            location.href = "result";
+          } else {
+            location.href = "#";
+          }
+          function addZero(i) {
+              if (i < 10) {i = "0" + i}
+              return i;
+            }
+          function time() {
+            const d = new Date();
+            let h = addZero(d.getHours());
+            let m = addZero(d.getMinutes());
+            let s = addZero(d.getSeconds());
+            let time = h + ":" + m + ":" + s;
+            return time;
+          }
+          function date() {
+            const d = new Date();
+            let date = addZero(d.getDate());
+            let month = addZero(d.getMonth() + 1);
+            let year = addZero(d.getFullYear());
+            let today = date + "-" + month + "-" + year;
+            return today;
+          }
+          var timer = time();
+          localStorage.setItem("Time",timer);
+</script>
+<footer class="site-footer" id="footer">
+      <p class="site-footer__fineprint text-center" id="fineprint">Copyright &#169;2023 | RoboSIZ All Rights Reserved</p>
+    </footer>
+  </body>
+</html>
